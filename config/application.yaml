@@ -5,11 +5,7 @@ application:
   # 规则源配置
   input:
     - name: 'AdGuard Base Filter'
-      path: 'https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_2_Base/filter.txt'
-      type: easylist
-
-    - name: 'EasyList'
-      path: 'https://easylist.to/easylist/easylist.txt'
+      path: 'https://adguardteam.github.io/HostlistsRegistry/assets/filter_1.txt'
       type: easylist
 
     - name: 'anti-AD'
@@ -35,9 +31,31 @@ application:
     - name: 'qy-Ads-Rule'
       path: 'https://raw.gitcode.com/rssv/qy-Ads-Rule/raw/main/black.txt'
       type: easylist
-    # 按需继续添加你自己的    - name: 'qy-Ads-Rule'
-      path: 'https://raw.gitcode.com/rssv/qy-Ads-Rule/raw/main/black.txt'
-      type: easylist 订阅源，格式同上，name 不能重复
+      
+    - name: 'SMAdHosts'
+      path: 'https://raw.githubusercontent.com/2Gardon/SM-Ad-FuckU-hosts/master/SMAdHosts'
+      type: easylist
+      
+    - name: '那个谁520规则'
+      path: 'https://raw.githubusercontent.com/qq5460168/666/master/dns.txt'
+      type: easylist
+
+    - name: 'TTDNS'
+      path: 'https://raw.githubusercontent.com/TTDNS/Cat/refs/heads/main/DNS.TXT'
+      type: easylist
+      
+    - name: '茯苓广告规则'
+      path: 'https://raw.githubusercontent.com/Kuroba-Sayuki/FuLing-AdRules/Master/FuLingRules/FuLingBlockList.txt'
+      type: easylist
+      
+    - name: 'HG'
+      path: 'https://raw.githubusercontent.com/2771936993/HG/main/hg1.txt'
+      type: easylist
+      
+    - name: 'adg-kall-dns-Rule'
+      path: 'https://www.kbsml.com/wp-content/uploads/adblock/adguard/adg-kall-dns.txt'
+      type: easylist
+    # 按需继续添加你自己的订阅源，格式同上，name 不能重复
 
   # 输出配置
   output:
