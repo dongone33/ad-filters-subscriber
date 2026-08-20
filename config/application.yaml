@@ -26,7 +26,7 @@ application:
       ADFS AdBlock ${type}
       Last Modified: ${date}
       Total Size: ${total}
-      Homepage: https://github.com/fordes123/ad-filters-subscriber/
+      Homepage: https://github.com/dongone33/ad-filters-subscriber
 
     files:
       # 黑名单（原有的合并规则，保持不变）
