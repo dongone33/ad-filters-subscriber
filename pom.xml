@@ -17,6 +17,7 @@
         <commons-codec.version>1.21.0</commons-codec.version>
         <fastutil.version>8.5.18</fastutil.version>
         <maven-compiler-plugin.version>3.15.0</maven-compiler-plugin.version>
+        <lombok.version>1.18.44</lombok.version>
     </properties>
 
     <dependencies>
