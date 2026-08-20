@@ -13,7 +13,11 @@ application:
       type: easylist
 
     - name: 'anti-AD'
-      path: 'https://raw.githubusercontent.com/privacy-protection-tools/anti-AD/master/anti-ad-easylist.txt'
+      path: 'https://anti-ad.net/easylist.txt'
+      type: easylist
+
+    - name: 'AWAvenue-Ads-Rule'
+      path: 'https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/AWAvenue-Ads-Rule.txt'
       type: easylist
 
     # 按需继续添加你自己的订阅源，格式同上，name 不能重复
