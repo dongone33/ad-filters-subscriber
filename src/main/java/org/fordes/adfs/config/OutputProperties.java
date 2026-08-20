@@ -47,6 +47,10 @@ public record OutputProperties(
 
             @NotEmpty
             @DefaultValue({})
+            Set<Rule.Mode> mode,
+            
+            @NotEmpty
+            @DefaultValue({})
             Set<@NotBlank String> rule
 
     ) {
