@@ -37,6 +37,10 @@ application:
           - wildcard           #通配规则，仅使用通配符
           - unknown            #其他规则，如使用了正则、高级修饰符号的规则，这些规则目前无法转换为其他格式
 
+        mode:                   #可选参数: 限定此文件输出的规则模式: deny(拦截，默认)、allow(放行/白名单)、rewrite(重写)，不指定则不做模式过滤
+          - deny
+          - allow
+          
         rule:                  #可选参数: 限定此文件使用的规则源，如果不指定则使用 input 中的所有规则源
           - Subscription 1
           - Subscription 2
@@ -46,6 +50,13 @@ application:
         filter:
           - basic
           - wildcard
+          
+      #单独输出一份 easylist 白名单文件（仅包含 @@ 例外/放行规则）
+      - name: easylist-allow.txt
+        type: easylist
+        desc: 'ADFS EasyList Allow'
+        mode:                   #可选参数: 限定此文件输出的规则模式: deny(拦截，默认)、allow(放行/白名单)、rewrite(重写)
+          - allow                #仅保留放行(白名单)规则
 
       - name: dnsmasq.txt
         type: dnsmasq
