@@ -27,12 +27,12 @@ application:
 
     files:
       # 黑名单（原有的合并规则，保持不变）
-      - name: easylist.txt
+      - name: Blacklist.txt
         type: easylist
         desc: 'ADFS EasyList'
 
       # 单独新增：easylist 白名单（只含 @@ 放行规则）
-      - name: easylist-allow.txt
+      - name: Allowlist.txt
         type: easylist
         desc: 'ADFS EasyList Allow'
         mode:
