@@ -59,7 +59,11 @@ application:
     - name: '喵二黑名单'
       path: 'https://raw.githubusercontent.com/miaoermua/AdguardFilter/main/rule.txt'
       type: easylist
-    
+      
+    - name: 'anti-AD-plus_blocklist'
+      path: 'https://raw.githubusercontent.com/mphin/adguardhome_rules/main/Blacklist.txt'
+      type: easylist
+      
     #以下是白名单
     - name: '茯苓允许列表'
       path: 'https://raw.githubusercontent.com/Kuroba-Sayuki/FuLing-AdRules/Master/FuLingRules/FuLingAllowList.txt'
