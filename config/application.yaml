@@ -19,8 +19,25 @@ application:
     - name: 'AWAvenue-Ads-Rule'
       path: 'https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/AWAvenue-Ads-Rule.txt'
       type: easylist
+      
+    - name: 'Halflife-Rule'
+      path: 'https://cdn.jsdelivr.net/gh/sbwml/halflife-list@master/ad.txt'
+      type: easylist
 
-    # 按需继续添加你自己的订阅源，格式同上，name 不能重复
+    - name: 'DD-AD'
+      path: 'https://raw.githubusercontent.com/afwfv/DD-AD/refs/heads/release/dns.txt'
+      type: easylist
+
+    - name: 'damengzhu'
+      path: 'https://raw.githubusercontent.com/damengzhu/banad/main/jiekouAD.txt'
+      type: easylist
+      
+    - name: 'qy-Ads-Rule'
+      path: 'https://raw.gitcode.com/rssv/qy-Ads-Rule/raw/main/black.txt'
+      type: easylist
+    # 按需继续添加你自己的    - name: 'qy-Ads-Rule'
+      path: 'https://raw.gitcode.com/rssv/qy-Ads-Rule/raw/main/black.txt'
+      type: easylist 订阅源，格式同上，name 不能重复
 
   # 输出配置
   output:
