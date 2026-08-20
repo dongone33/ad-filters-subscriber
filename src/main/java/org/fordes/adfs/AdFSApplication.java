@@ -103,6 +103,7 @@ public class AdFSApplication {
         return Flux.fromIterable(outputs)
                 .filter(file -> file.rule().isEmpty() || file.rule().contains(rule.getSourceName()))
                 .filter(file -> file.filter().isEmpty() || file.filter().contains(rule.getType()))
+                .filter(file -> file.mode().isEmpty() || file.mode().contains(rule.getMode()))
                 .flatMap(file -> {
                     Handler handler = Handler.getHandler(file.type());
                     String content = handler.format(rule);
