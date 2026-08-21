@@ -196,6 +196,15 @@ public class Util {
     }
 
 
+    /**
+     * 常见非域名后缀（脚本/样式/图片/字体等资源文件后缀）<br/>
+     * 用于排除被误判为域名的 URL 路径片段，例如 "n.2.1.js"
+     */
+    private static final java.util.Set<String> NON_DOMAIN_SUFFIX = java.util.Set.of(
+            "js", "css", "png", "jpg", "jpeg", "gif", "webp", "svg",
+            "json", "php", "html", "htm", "ico", "woff", "woff2", "ttf", "map"
+    );
+
     public static Rule.Type decectBaseRule(String content) {
         String temp = content;
         if (temp.contains(Symbol.ASTERISK)) {
@@ -210,12 +219,20 @@ public class Util {
             temp = temp.substring(0, temp.length() - 1);
         }
 
-        if (PATTERN_DOMAIN.matcher(temp).matches()) {
-            return content.equals(temp) ? Rule.Type.BASIC : Rule.Type.WILDCARD;
-        } else if (DOMAIN_PART.matcher(temp).matches()) {
-            return Rule.Type.WILDCARD;
-        } else {
+        // 不含点号，说明不具备完整域名结构（大概率是关键词/文件名片段），直接判定为非域名规则
+        if (!temp.contains(Symbol.DOT)) {
             return null;
         }
+
+        // 末尾一段若命中常见资源文件后缀，说明这是 URL 路径片段而非域名，直接判定为非域名规则
+        String tld = temp.substring(temp.lastIndexOf(Symbol.DOT) + 1).toLowerCase();
+        if (NON_DOMAIN_SUFFIX.contains(tld)) {
+            return null;
+        }
+
+        if (PATTERN_DOMAIN.matcher(temp).matches()) {
+            return content.equals(temp) ? Rule.Type.BASIC : Rule.Type.WILDCARD;
+        }
+        return null;
     }
 }
