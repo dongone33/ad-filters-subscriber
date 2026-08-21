@@ -103,6 +103,10 @@ application:
         desc: 'ADFS EasyList'
         mode:
           - deny
+        filter:
+          - basic
+          - wildcard
+          - regex 
 
       # 单独新增：白名单（只含 @@ 放行规则）
       - name: Allowlist.txt
@@ -110,3 +114,7 @@ application:
         desc: 'ADFS EasyList Allow'
         mode:
           - allow
+        filter:
+          - basic
+          - wildcard
+          - regex 
