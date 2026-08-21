@@ -22,7 +22,7 @@ application:
 
     - name: 'DD-AD'
       path: 'https://raw.githubusercontent.com/afwfv/DD-AD/refs/heads/release/dns.txt'
-      type: dns
+      type: easylist
 
     - name: 'damengzhu'
       path: 'https://raw.githubusercontent.com/damengzhu/banad/main/jiekouAD.txt'
@@ -42,7 +42,7 @@ application:
 
     - name: 'TTDNS'
       path: 'https://raw.githubusercontent.com/TTDNS/Cat/refs/heads/main/DNS.TXT'
-      type: dns
+      type: easylist
       
     - name: '茯苓广告规则'
       path: 'https://raw.githubusercontent.com/Kuroba-Sayuki/FuLing-AdRules/Master/FuLingRules/FuLingBlockList.txt'
