@@ -9,6 +9,8 @@ import org.fordes.adfs.enums.RuleSet;
 
 import java.nio.charset.StandardCharsets;
 import java.util.HashSet;
+import java.util.LinkedHashMap;                 #新增
+import java.util.Map;                           #新增
 import java.util.Objects;
 import java.util.Set;
 
