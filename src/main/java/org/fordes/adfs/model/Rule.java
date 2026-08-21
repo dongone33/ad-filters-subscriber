@@ -83,7 +83,11 @@ public class Rule {
                 buffer.writeInt(this.mode.ordinal());
                 buffer.writeInt(this.scope.ordinal());
                 buffer.writeInt(this.type.ordinal());
-            }
+                if (!this.options.isEmpty()) {
+                   int len = buffer.writeCharSequence(this.options.toStringfunction toString() { [native code] }(), StandardCharsets.UTF_8);
+                   buffer.writeInt(len);
+    }
+}
 
             byte[] bytes = new byte[buffer.readableBytes()];
             buffer.readBytes(bytes);
@@ -201,6 +205,7 @@ public class Rule {
                     this.mode == rule.mode &&
                     this.scope == rule.scope &&
                     this.type == rule.type;
+                    Objects.equals(this.options, rule.options);
         }
         return false;
     }
@@ -210,7 +215,7 @@ public class Rule {
         if (Type.UNKNOWN == this.type) {
             return Objects.hash(this.origin);
         }
-        return Objects.hash(getTarget(), getMode(), getScope(), getType());
+        return Objects.hash(getTarget(), getMode(), getScope(), getType(),getOptions());
     }
 
     @Override
