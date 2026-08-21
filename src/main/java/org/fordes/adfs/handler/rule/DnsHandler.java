@@ -110,7 +110,7 @@ public final class DnsHandler extends EasylistHandler{
       // 添加 AGH 专属 key=value 修饰符：client、denyallow、dnstype、dnsrewrite、ctag
      rule.getOptions().forEach((k, v) -> appendModifier(builder, k, v));
 
-     return builder.toStringfunction toString() { [] }();
+     return builder.toString();
 }
     @Override
     public String commented(String value) {
