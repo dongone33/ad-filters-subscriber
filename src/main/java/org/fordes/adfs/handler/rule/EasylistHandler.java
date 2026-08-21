@@ -80,16 +80,15 @@ public sealed class EasylistHandler extends Handler implements InitializingBean 
             rule.setType(Rule.Type.REGEX);
             line = line.substring(1, line.length() - 1);
             rule.setTarget(line);
-        }
-
-        Rule.Type type = Util.decectBaseRule(line);
-        if (type != null) {
-            // BASE、WILDCARD
-            rule.setType(type);
-            rule.setTarget(line);
-            rule.setScope(Rule.Scope.DOMAIN);
-            if (Rule.Mode.DENY.equals(rule.getMode())) {
-                rule.setDest(UNKNOWN_IP);
+        } else {
+            Rule.Type type = Util.decectBaseRule(line);
+            if (type != null) {
+               // BASE、WILDCARD
+               rule.setType(type);
+               rule.setTarget(line);
+               rule.setScope(Rule.Scope.DOMAIN);
+               if (Rule.Mode.DENY.equals(rule.getMode())) {
+                  rule.setDest(UNKNOWN_IP);
             }
 
         } else if (rule.getType() == null) {
