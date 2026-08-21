@@ -84,7 +84,7 @@ public class Rule {
                 buffer.writeInt(this.scope.ordinal());
                 buffer.writeInt(this.type.ordinal());
                 if (!this.options.isEmpty()) {
-                   int len = buffer.writeCharSequence(this.options.toStringfunction toString() { [native code] }(), StandardCharsets.UTF_8);
+                   int len = buffer.writeCharSequence(this.options.toString(), StandardCharsets.UTF_8);
                    buffer.writeInt(len);
     }
 }
