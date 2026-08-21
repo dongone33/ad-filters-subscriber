@@ -55,8 +55,10 @@ public final class DnsHandler extends EasylistHandler{
             return null;
         }
 
-        if (rule.getType() != Rule.Type.BASIC && rule.getType() != Rule.Type.WILDCARD) {
-            return null;
+        if (rule.getType() != Rule.Type.BASIC
+        && rule.getType() != Rule.Type.WILDCARD
+        && rule.getType() != Rule.Type.REGEX) {
+    return null;
         }
 
         // 重写规则直接以hosts格式返回
@@ -82,13 +84,13 @@ public final class DnsHandler extends EasylistHandler{
         }
 
         // 添加目标规则
-        if (rule.getType() == Rule.Type.WILDCARD) {
-            builder.append(Constants.Symbol.SLASH)
-                    .append(rule.getTarget())
-                    .append(Constants.Symbol.SLASH);
+        if (rule.getType() == Rule.Type.WILDCARD || rule.getType() == Rule.Type.REGEX) {
+        builder.append(Constants.Symbol.SLASH)
+            .append(rule.getTarget())
+            .append(Constants.Symbol.SLASH);
         } else {
             builder.append(rule.getTarget());
-        }
+    }
 
         // 添加限定符标记
         if (controls.contains(Rule.Control.QUALIFIER)) {
@@ -97,12 +99,19 @@ public final class DnsHandler extends EasylistHandler{
 
         // 添加重要标记
         if (controls.contains(Rule.Control.IMPORTANT)) {
-            builder.append(Constants.Symbol.DOLLAR).append(IMPORTANT);
-        }
+           appendModifier(builder, IMPORTANT, null);
+}
 
-        return builder.toString();
-    }
+       // 添加 badfilter 标记
+       if (controls.contains(Rule.Control.BADFILTER)) {
+          appendModifier(builder, Constants.BADFILTER, null);
+}
 
+      // 添加 AGH 专属 key=value 修饰符：client、denyallow、dnstype、dnsrewrite、ctag
+     rule.getOptions().forEach((k, v) -> appendModifier(builder, k, v));
+
+     return builder.toStringfunction toString() { [] }();
+}
     @Override
     public String commented(String value) {
         return super.commented(value);
