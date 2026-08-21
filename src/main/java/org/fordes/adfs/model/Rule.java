@@ -204,7 +204,7 @@ public class Rule {
             return Objects.equals(this.target, rule.target) &&
                     this.mode == rule.mode &&
                     this.scope == rule.scope &&
-                    this.type == rule.type;
+                    this.type == rule.type &&
                     Objects.equals(this.options, rule.options);
         }
         return false;
