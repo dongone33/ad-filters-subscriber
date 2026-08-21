@@ -62,5 +62,5 @@
 3. 规则有效性检测基于域名解析，因此仅支持基本规则 (只能检测当前域有效性，而无法检测其是否存在有效子域，故此功能可能存在误杀)。
 
 #### 参考项目
-fordes123/ad-filters-subscriber【(https://github.com/fordes123/ad-filters-subscriber)】
+fordes123/ad-filters-subscriber
 <h2 id="b">🛠️
