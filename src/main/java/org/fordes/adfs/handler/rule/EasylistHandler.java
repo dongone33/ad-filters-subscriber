@@ -40,19 +40,33 @@ public sealed class EasylistHandler extends Handler implements InitializingBean 
         }
 
         if (line.contains(Symbol.DOLLAR)) {
-            int i = line.indexOf(Symbol.DOLLAR);
-            var mod = line.substring(i + 1);
-            line = line.substring(0, i);
+           int i = line.indexOf(Symbol.DOLLAR);
+           String mods = line.substring(i + 1);
+           line = line.substring(0, i);
 
-            if (Constants.IMPORTANT.equals(mod.trim())) {
-                rule.getControls().add(Rule.Control.IMPORTANT);
-            } else if ("all".equals(mod.trim())) {
-                rule.getControls().add(Rule.Control.ALL);
-            } else {
+        for (String raw : mods.split(Symbol.COMMA)) {
+            String mod = raw.trim();
+            if (mod.isEmpty()) {
+            continue;
+        }
+            int eq = mod.indexOf(Symbol.EQUAL);
+            String key = eq >= 0 ? mod.substring(0, eq) : mod;
+            String value = eq >= 0 ? mod.substring(eq + 1) : null;
+
+            switch (key) {
+                case Constants.IMPORTANT -> rule.getControls().add(Rule.Control.IMPORTANT);
+                case Constants.ALL -> rule.getControls().add(Rule.Control.ALL);
+                case Constants.BADFILTER -> rule.getControls().add(Rule.Control.BADFILTER);
+                case Constants.CLIENT, Constants.DENYALLOW, Constants.DNSTYPE,
+                     Constants.DNSREWRITE, Constants.CTAG -> rule.getOptions().put(key, value);
+                default -> {
+                // AGH 规范：出现未列出的修饰符，整条规则应被忽略
                 rule.setType(Rule.Type.UNKNOWN);
                 return rule;
             }
         }
+    }
+}
 
         // ^ 分隔符字符
         // 与浏览器广告拦截不同，主机名中没有什么需要分隔的字符，因此该字符的唯一目的是标记主机名的结尾。
@@ -132,21 +146,35 @@ public sealed class EasylistHandler extends Handler implements InitializingBean 
         }
 
         // 添加优先级标记
-        if (controls.contains(Rule.Control.IMPORTANT)) {
-            builder.append(Symbol.DOLLAR).append(IMPORTANT);
-        }
+       if (controls.contains(Rule.Control.IMPORTANT)) {
+          appendModifier(builder, IMPORTANT, null);
+}
 
-        if (controls.contains(Rule.Control.ALL)) {
-            int i = builder.indexOf(Symbol.DOLLAR);
-            if (i == -1) {
-                builder.append(Symbol.DOLLAR).append(ALL);
-            } else {
-                builder.append(Symbol.COMMA).append(ALL);
-            }
-        }
+       if (controls.contains(Rule.Control.ALL)) {
+          appendModifier(builder, ALL, null);
+}
 
-        return builder.toString();
+// 添加 badfilter 标记
+       if (controls.contains(Rule.Control.BADFILTER)) {
+          appendModifier(builder, Constants.BADFILTER, null);
+}
+
+// 添加 AGH 专属 key=value 修饰符：client、denyallow、dnstype、dnsrewrite、ctag
+       rule.getOptions().forEach((k, v) -> appendModifier(builder, k, v));
+
+       return builder.toString();
+}
+
+/**
+ * 追加一个 $ 修饰符，自动处理 $ 与 , 分隔符
+ */
+       protected void appendModifier(StringBuilder builder, String name, String value) {
+           builder.append(builder.indexOf(Symbol.DOLLAR) == -1 ? Symbol.DOLLAR : Symbol.COMMA)
+                  .append(name);
+       if (value != null) {
+          builder.append(Symbol.EQUAL).append(value);
     }
+}
 
     @Override
     public String commented(String value) {
