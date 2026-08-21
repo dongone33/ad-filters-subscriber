@@ -64,6 +64,11 @@ public class Rule {
      * 控制符集 {@link Control}
      */
     private Set<Control> controls = new HashSet<>(Control.values().length, 1.0f);
+    
+    /**
+ * AGH 专属 key=value 修饰符，如 client、dnstype、ctag、denyallow、dnsrewrite
+ */
+    private final Map<String, String> options = new LinkedHashMap<>();
 
     public static final Rule EMPTY = new Rule();
 
@@ -107,6 +112,8 @@ public class Rule {
          * 限定符，通常是 ^
          */
         QUALIFIER,
+
+        BADFILTER,
 
         ALL,
         ;
