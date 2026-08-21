@@ -1,5 +1,5 @@
 <div align="center">
-<h1>AD Filter Subscriber</h1>
+<h1>AI-AD Filter Subscriber</h1>
   <p>
     广告过滤规则订阅器，聚合多来源、多格式的规则，自动清洗、去重、转换，帮助你快速构建属于自己的规则集~
   </p>
@@ -25,7 +25,7 @@
 
 <h2 id="a">📔 项目说明</h2>
 
-**AI-AD Filter Subscriber** 是一个基于 Spring Boot 开发的广告过滤规则聚合与转换工具，核心目标是把互联网上零散的、格式各异的广告拦截规则订阅源，自动抓取、清洗、去重、格式转换后，合并输出成一份可以直接被 AdGuardHome 等 DNS 过滤软件使用的规则集。
+**AI-AD Filter Subscriber** 是一个基于 Spring Boot与 AI 开发的广告过滤规则聚合与转换工具，核心目标是把互联网上零散的、格式各异的广告拦截规则订阅源，自动抓取、清洗、去重、格式转换后，合并输出成一份可以直接被 AdGuardHome 等 DNS 过滤软件使用的规则集。
 
 #### 解决的问题
 
@@ -61,4 +61,6 @@
 2. 接受不可避免的缩限，如 `||example.org^` 将拦截 example.org 及其所有子域，但将其转换为 hosts 格式时，将无法匹配子域名。
 3. 规则有效性检测基于域名解析，因此仅支持基本规则 (只能检测当前域有效性，而无法检测其是否存在有效子域，故此功能可能存在误杀)。
 
+#### 参考项目
+fordes123/ad-filters-subscriber【(https://github.com/fordes123/ad-filters-subscriber)】
 <h2 id="b">🛠️
