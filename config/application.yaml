@@ -6,7 +6,7 @@ application:
   input:
     - name: 'AdGuard Base Filter'
       path: 'https://adguardteam.github.io/HostlistsRegistry/assets/filter_1.txt'
-      type: easylist
+      type: dns
 
     - name: 'anti-AD'
       path: 'https://anti-ad.net/easylist.txt'
@@ -22,7 +22,7 @@ application:
 
     - name: 'DD-AD'
       path: 'https://raw.githubusercontent.com/afwfv/DD-AD/refs/heads/release/dns.txt'
-      type: easylist
+      type: dns
 
     - name: 'damengzhu'
       path: 'https://raw.githubusercontent.com/damengzhu/banad/main/jiekouAD.txt'
@@ -34,15 +34,15 @@ application:
       
     - name: 'SMAdHosts'
       path: 'https://raw.githubusercontent.com/2Gardon/SM-Ad-FuckU-hosts/master/SMAdHosts'
-      type: easylist
+      type: host
       
     - name: '那个谁520规则'
       path: 'https://raw.githubusercontent.com/qq5460168/666/master/dns.txt'
-      type: easylist
+      type: dns
 
     - name: 'TTDNS'
       path: 'https://raw.githubusercontent.com/TTDNS/Cat/refs/heads/main/DNS.TXT'
-      type: easylist
+      type: dns
       
     - name: '茯苓广告规则'
       path: 'https://raw.githubusercontent.com/Kuroba-Sayuki/FuLing-AdRules/Master/FuLingRules/FuLingBlockList.txt'
@@ -101,6 +101,8 @@ application:
       - name: Blacklist.txt
         type: easylist
         desc: 'ADFS EasyList'
+        mode:
+          - deny
 
       # 单独新增：easylist 白名单（只含 @@ 放行规则）
       - name: Allowlist.txt
