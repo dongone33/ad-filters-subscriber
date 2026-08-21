@@ -1,15 +1,15 @@
 <div align="center">
 <h1>AD Filter Subscriber</h1>
   <p>
-    广告过滤规则订阅器，整合不同来源的规则，帮助你快速构建属于自己的规则集~
+    广告过滤规则订阅器，聚合多来源、多格式的规则，自动清洗、去重、转换，帮助你快速构建属于自己的规则集~
   </p>
 <!-- Badges -->
 <p>
-  <img src="https://img.shields.io/github/last-commit/fordes123/ad-filters-subscriber?style=flat-square" alt="last update" />
-  <img src="https://img.shields.io/github/forks/fordes123/ad-filters-subscriber?style=flat-square" alt="forks" />
-  <img src="https://img.shields.io/github/stars/fordes123/ad-filters-subscriber?style=flat-square" alt="stars" />
-  <img src="https://img.shields.io/github/issues/fordes123/ad-filters-subscriber?style=flat-square" alt="open issues" />
-  <img src="https://img.shields.io/github/license/fordes123/ad-filters-subscriber?style=flat-square" alt="license" />
+  <img src="https://img.shields.io/github/last-commit/dongone33/ad-filters-subscriber?style=flat-square" alt="last update" />
+  <img src="https://img.shields.io/github/forks/dongone33/ad-filters-subscriber?style=flat-square" alt="forks" />
+  <img src="https://img.shields.io/github/stars/dongone33/ad-filters-subscriber?style=flat-square" alt="stars" />
+  <img src="https://img.shields.io/github/issues/dongone33/ad-filters-subscriber?style=flat-square" alt="open issues" />
+  <img src="https://img.shields.io/github/license/dongone33/ad-filters-subscriber?style=flat-square" alt="license" />
 </p>
 
 <h4>
@@ -23,11 +23,31 @@
   </h4>
 </div>
 
-[English](./README_en.md) | 中文
 <h2 id="a">📔 项目说明</h2>
 
-本项目旨在聚合不同来源、不同格式的广告过滤规则，自由的进行转换和整合。
+**AD Filter Subscriber** 是一个基于 Spring Boot 开发的广告过滤规则聚合与转换工具，核心目标是把互联网上零散的、格式各异的广告拦截规则订阅源，自动抓取、清洗、去重、格式转换后，合并输出成一份可以直接被 AdGuardHome 等 DNS 过滤软件使用的规则集。
+
+#### 解决的问题
+
+广告拦截规则通常分散在不同作者维护的多个订阅源里，格式也不统一（EasyList 语法、hosts 格式、DNS 专用格式等），直接把所有订阅源塞进过滤软件容易出现：
+- 规则重复、体积臃肿
+- 格式不兼容导致软件报错或规则失效
+- 单一来源覆盖不全，拦截效果参差不齐
+
+本项目通过统一的解析 → 转换 → 去重 → 输出流水线，把多个来源"揉"成一份干净、可直接订阅的规则文件。
+
+#### 核心能力
+
+- **多格式输入解析**：支持 easylist、dns (AdGuardHome)、dnsmasq、clash、smartdns、hosts 等多种规则格式作为输入源
+- **规则语义转换**：自动识别规则类型（域名规则 BASIC、通配符规则 WILDCARD、正则规则 REGEX），在不同格式之间转换时尽量保留原始拦截意图
+- **去重与合并**：基于哈希对规则做去重，避免不同来源间的重复规则
+- **DNS 可用性探测**（可选）：对基础域名规则做 DNS 解析校验，过滤掉已失效的域名，降低误杀风险
+- **黑白名单分离输出**：按 `mode`（deny/allow）、`filter`（basic/wildcard/regex）等维度灵活配置输出文件，生成独立的 Blacklist / Allowlist
+- **AdGuardHome 专项适配**：正确处理 `||` 锚点、`^` 限定符、`$important`、`$badfilter`、`$denyallow` 等 AGH 专属修饰符，并将 hosts 格式重写规则转换为 AGH 的 rewrite 语法
+- **全自动化更新**：配合 GitHub Actions（`.github/workflows/auto-update.yml`）定时抓取所有订阅源、重新编译生成规则文件并提交，无需人工干预
+
 > ⚠️ 新版不再兼容原配置格式，迁移前务必注意
+
 #### 支持的规则格式
 - [x] easylist
 - [x] dns (AdGuardHome)
@@ -37,90 +57,8 @@
 - [x] hosts
 
 #### 注意事项
-1. 仅支持基本规则转换，即域名、通配域名构成的规则，对形如 `||example.org^$popup` 等规则无法转换(合并、去重不受影响) 
+1. 仅支持基本规则转换，即域名、通配域名构成的规则，对形如 `||example.org^$popup` 等规则无法转换(合并、去重不受影响)
 2. 接受不可避免的缩限，如 `||example.org^` 将拦截 example.org 及其所有子域，但将其转换为 hosts 格式时，将无法匹配子域名。
 3. 规则有效性检测基于域名解析，因此仅支持基本规则 (只能检测当前域有效性，而无法检测其是否存在有效子域，故此功能可能存在误杀)。
 
-<h2 id="b">🛠️ 快速开始</h2>
-
-### 示例配置
-
-```yaml
-application:
-  
-  # 输入配置
-  input:
-    - name: 'Subscription 1'               #可选参数: 规则名称，如无将使用 path 作为名称
-      path: 'https://example.org/rule.txt' #必要参数: 规则 url (http/https) 或 本地文件位置 (绝对/相对路径)
-      type: easylist                       #可选参数: 规则类型：easylist (默认)、dns、dnsmasq、clash、smartdns、hosts
-
-    - name: 'Subscription 2'
-      path: 'rule/local.txt'
-      type: hosts
-
-  # 输出配置
-  output:
-    #文件头配置，将自动作为注释添加至每个规则文件开始
-    #可使用占位符 ${name}、${type}、${desc} 以及 ${date} (当前日期)、${total} (规则总数)
-    file_header: |
-      ADFS AdBlock ${type}
-      Last Modified: ${date}
-      Total Size: ${total}
-      Homepage: https://github.com/fordes123/ad-filters-subscriber/
-      
-    files:
-      - name: easylist.txt     #必要参数: 文件名
-        type: easylist         #必要参数: 文件类型: easylist、dns、dnsmasq、clash、smartdns、hosts
-        file_header:           #可选参数: 文件头配置，将自动作为注释添加至每个规则文件开始 (此处优先于 output.file_header)
-        desc: 'ADFS EasyList'  #可选参数: 文件描述，可在file_header中通过 ${} 中使用
-        filter:
-          - basic              #基本规则，不包含任何控制、匹配符号, 可以转换为 hosts
-          - wildcard           #通配规则，仅使用通配符
-          - unknown            #其他规则，如使用了正则、高级修饰符号的规则，这些规则目前无法转换为其他格式
-        rule:                  #可选参数: 限定此文件使用的规则源，如果不指定则使用 input 中的所有规则源
-          - Subscription 1
-          - Subscription 2     
-```
-
----
-本程序基于 `Java25` 编写，使用 `Maven` 进行构建，你可以参照[示例配置](./config/application-example.yaml)，编辑 `config/application.yaml`
-，并通过以下任意一种方式快速开始：
-
-#### **本地调试**
-
-```bash
-git clone https://github.com/fordes123/ad-filters-subscriber.git
-cd ad-filters-subscriber
-mvn clean
-mvn spring-boot:run
-```
-
-#### **Github Action**
-
-- fork 本项目
-- 自定义规则订阅 (可选)
-    - 参照[示例配置](./config/application-example.yaml)，修改配置文件: `config/application.yaml`
-- 打开 `Github Action` 页面，选中左侧 `Update Filters` 授权 `Workflow` 定时执行(⚠ 重要步骤)
-- 点击 `Run workflow` 或等待自动执行。执行完成后规则将生成在 `release` 分支
-
-#### **Codespaces**
-
-- 登录 `Github`，点击本仓库右上角 `Code` 按钮，选择并创建新的 `Codespaces`
-- 等待 `Codespaces` 启动，即可直接对本项目进行调试
-
-<h2 id="c">🎯 规则订阅</h2>
-
-**⚠ 本仓库不再提供规则订阅，我们更推荐 fork 本项目自行构建规则集.**
-
-下面是使用了本项目进行构建的规则仓库，可在其中寻找合适的规则订阅:
-<details>
-<summary>点击查看</summary>
-<ul>
-    <br/>
-    <li><a href="https://github.com/xndeye/adblock_list/">xndeye/adblock_list</a></li>
-</ul>
-</details>
-
-<h2 id="d">💬 问题反馈</h2>
-
-- 👉 [issues](https://github.com/fordes123/ad-filters-subscriber/issues)
+<h2 id="b">🛠️
