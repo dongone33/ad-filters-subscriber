@@ -99,14 +99,14 @@ application:
     files:
       # 黑名单（原有的合并规则，保持不变）
       - name: Blacklist.txt
-        type: easylist
+        type: dns
         desc: 'ADFS EasyList'
         mode:
           - deny
 
-      # 单独新增：easylist 白名单（只含 @@ 放行规则）
+      # 单独新增：白名单（只含 @@ 放行规则）
       - name: Allowlist.txt
-        type: easylist
+        type: dns
         desc: 'ADFS EasyList Allow'
         mode:
           - allow
