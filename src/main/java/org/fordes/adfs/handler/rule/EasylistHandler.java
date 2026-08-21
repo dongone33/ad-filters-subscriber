@@ -162,6 +162,6 @@ public sealed class EasylistHandler extends Handler implements InitializingBean 
 
     @Override
     public boolean isComment(String line) {
-        return Util.startWithAny(line, Symbol.HASH, Symbol.EXCLAMATION) || Util.between(line, Symbol.LEFT_BRACKETS, Symbol.RIGHT_BRACKETS);
+        return Util.startWithAny(line, Symbol.HASH, Symbol.EXCLAMATION, "＃", "！") || Util.between(line, Symbol.LEFT_BRACKETS, Symbol.RIGHT_BRACKETS);
     }
 }
