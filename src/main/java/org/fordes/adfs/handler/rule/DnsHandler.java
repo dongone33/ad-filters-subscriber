@@ -78,23 +78,24 @@ public final class DnsHandler extends EasylistHandler{
 
         Set<Rule.Control> controls = rule.getControls();
 
-        // 添加覆盖标记
-        if (controls.contains(Rule.Control.OVERLAY)) {
-            builder.append(DOUBLE_PIPE);
-        }
-
-        // 添加目标规则
-        if (rule.getType() == Rule.Type.WILDCARD || rule.getType() == Rule.Type.REGEX) {
-        builder.append(Constants.Symbol.SLASH)
-            .append(rule.getTarget())
-            .append(Constants.Symbol.SLASH);
+        if (rule.getType() == Rule.Type.REGEX) {
+            // AGH 正则规则必须独立书写为 /regex/，不能再与 || 锚点、^ 限定符叠加使用
+            builder.append(Constants.Symbol.SLASH)
+                .append(rule.getTarget())
+                .append(Constants.Symbol.SLASH);
         } else {
-            builder.append(rule.getTarget());
-    }
+            // 添加覆盖标记
+            if (controls.contains(Rule.Control.OVERLAY)) {
+                builder.append(DOUBLE_PIPE);
+            }
 
-        // 添加限定符标记
-        if (controls.contains(Rule.Control.QUALIFIER)) {
-            builder.append(Constants.Symbol.CARET);
+            // 添加目标规则（WILDCARD 类型的 * 通配符可直接出现在 target 中，无需额外包裹）
+            builder.append(rule.getTarget());
+
+            // 添加限定符标记
+            if (controls.contains(Rule.Control.QUALIFIER)) {
+                builder.append(Constants.Symbol.CARET);
+            }
         }
 
         // 添加重要标记
