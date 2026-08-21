@@ -18,7 +18,13 @@ public class Constants {
     public static final String IMPORTANT = "important";
     public static final String ALL = "all";
     public static final String DOMAIN = "domain";
-    public static final String PAYLOAD = "payload";
+    public static final String BADFILTER = "badfilter";
+    public static final String CLIENT = "client";             #新增
+    public static final String DENYALLOW = "denyallow";       #新增
+    public static final String DNSTYPE = "dnstype";           #新增
+    public static final String DNSREWRITE = "dnsrewrite";     #新增
+    public static final String CTAG = "ctag";                 #新增
+    public static final String PAYLOAD = "payload";           #新增
 
     public static final String DNSMASQ_HEADER = "address=/";
     public static final String SMARTDNS_HEADER = "address /";
