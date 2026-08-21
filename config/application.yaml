@@ -4,16 +4,12 @@ application:
 
   # 规则源配置
   input:
-    - name: 'AdGuard Base Filter'
-      path: 'https://adguardteam.github.io/HostlistsRegistry/assets/filter_1.txt'
+    - name: '217heidai-adblockfilters'
+      path: 'https://raw.githubusercontent.com/217heidai/adblockfilters/main/rules/adblockdns.txt'
       type: dns
 
     - name: 'anti-AD'
       path: 'https://anti-ad.net/easylist.txt'
-      type: easylist
-
-    - name: 'AWAvenue-Ads-Rule'
-      path: 'https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/AWAvenue-Ads-Rule.txt'
       type: easylist
       
     - name: 'Halflife-Rule'
@@ -24,10 +20,6 @@ application:
       path: 'https://raw.githubusercontent.com/afwfv/DD-AD/refs/heads/release/dns.txt'
       type: easylist
 
-    - name: 'damengzhu'
-      path: 'https://raw.githubusercontent.com/damengzhu/banad/main/jiekouAD.txt'
-      type: easylist
-      
     - name: 'qy-Ads-Rule'
       path: 'https://raw.gitcode.com/rssv/qy-Ads-Rule/raw/main/black.txt'
       type: easylist
