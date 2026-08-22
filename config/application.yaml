@@ -43,7 +43,7 @@ application:
     - name: 'HG'
       path: 'https://raw.githubusercontent.com/2771936993/HG/main/hg1.txt'
       type: easylist
-      
+
     - name: 'adg-kall-dns-Rule'
       path: 'https://www.kbsml.com/wp-content/uploads/adblock/adguard/adg-kall-dns.txt'
       type: dns
@@ -59,6 +59,14 @@ application:
     - name: 'xlxbk-black-rule'
       path: 'https://oss.xlxbk.cn/dns.txt'
       type: dns    
+      
+    - name: 'hyper_adrules_ads_adguard'
+      path: 'https://github.com/Lynricsy/HyperADRules/releases/latest/download/hyper_adrules_ads_adguard.txt'
+      type: easylist
+
+    - name: 'hyper_adrules_malware_adguard'
+      path: 'https://github.com/Lynricsy/HyperADRules/releases/latest/download/hyper_adrules_malware_adguard.txt'
+      type: easylist
       
     #以下是白名单
     - name: '茯苓允许列表'
@@ -84,6 +92,11 @@ application:
     - name: 'xlxbk-allow-rule'
       path: 'https://oss.xlxbk.cn/allow.txt'
       type: dns
+
+    - name: 'hyper_adrules_allow_adguard'
+      path: 'https://github.com/Lynricsy/HyperADRules/releases/latest/download/hyper_adrules_allow_adguard.txt'
+      type: easylist
+      
     # 按需继续添加你自己的订阅源，格式同上，name 不能重复
 
   # 输出配置
