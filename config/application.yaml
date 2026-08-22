@@ -21,7 +21,7 @@ application:
       type: easylist
 
     - name: 'qy-Ads-Rule'
-      path: 'https://raw.gitcode.com/rssv/qy-Ads-Rule/raw/main/black.txt'
+      path: 'https://raw.githubusercontent.com/790953214/qy-Ads-Rule/refs/heads/main/black.txt'
       type: easylist
       
     - name: 'SMAdHosts'
