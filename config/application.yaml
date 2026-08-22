@@ -46,7 +46,7 @@ application:
       
     - name: 'adg-kall-dns-Rule'
       path: 'https://www.kbsml.com/wp-content/uploads/adblock/adguard/adg-kall-dns.txt'
-      type: easylist
+      type: dns
 
     - name: '喵二黑名单'
       path: 'https://raw.githubusercontent.com/miaoermua/AdguardFilter/main/rule.txt'
