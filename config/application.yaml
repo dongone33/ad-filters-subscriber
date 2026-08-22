@@ -55,6 +55,10 @@ application:
     - name: 'anti-AD-plus_blocklist'
       path: 'https://raw.githubusercontent.com/mphin/adguardhome_rules/main/Blacklist.txt'
       type: easylist
+
+    - name: 'xlxbk-black-rule'
+      path: 'https://oss.xlxbk.cn/dns.txt'
+      type: dns    
       
     #以下是白名单
     - name: '茯苓允许列表'
@@ -75,7 +79,11 @@ application:
     
     - name: '喵二白名单'
       path: 'https://raw.githubusercontent.com/miaoermua/AdguardFilter/main/whitelist.txt'
-      type: easylist 
+      type: easylist
+
+    - name: 'xlxbk-allow-rule'
+      path: 'https://oss.xlxbk.cn/allow.txt'
+      type: dns
     # 按需继续添加你自己的订阅源，格式同上，name 不能重复
 
   # 输出配置
