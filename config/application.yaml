@@ -62,11 +62,11 @@ application:
       
     - name: 'hyper_adrules_ads_adguard'
       path: 'https://github.com/Lynricsy/HyperADRules/releases/latest/download/hyper_adrules_ads_adguard.txt'
-      type: easylist
+      type: dns
 
     - name: 'hyper_adrules_malware_adguard'
       path: 'https://github.com/Lynricsy/HyperADRules/releases/latest/download/hyper_adrules_malware_adguard.txt'
-      type: easylist
+      type: dns
       
     #以下是白名单
     - name: '茯苓允许列表'
@@ -95,7 +95,7 @@ application:
 
     - name: 'hyper_adrules_allow_adguard'
       path: 'https://github.com/Lynricsy/HyperADRules/releases/latest/download/hyper_adrules_allow_adguard.txt'
-      type: easylist
+      type: dns
       
     # 按需继续添加你自己的订阅源，格式同上，name 不能重复
 
