@@ -49,6 +49,10 @@ public class HttpFetcher extends Fetcher {
                 .clientConnector(new ReactorClientHttpConnector(httpClient))
                 .exchangeStrategies(strategies)
                 .defaultHeader(HttpHeaders.CONNECTION, "keep-alive")
+                .defaultHeader(HttpHeaders.USER_AGENT,
+                        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+                                + "(KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36")
+                .defaultHeader(HttpHeaders.ACCEPT, "text/plain,text/html,*/*;q=0.8")
 //                .defaultHeader(HttpHeaders.ACCEPT_CHARSET, this.charset().displayName())
 //                .defaultHeader(HttpHeaders.ACCEPT_ENCODING, "gzip, deflate, br")
                 .build();
