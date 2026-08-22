@@ -90,6 +90,11 @@ public sealed class EasylistHandler extends Handler implements InitializingBean 
                 if (Rule.Mode.DENY.equals(rule.getMode())) {
                     rule.setDest(UNKNOWN_IP);
                 }
+                // 规范化：只要被判定为域名规则，无论原始文本是否自带 || 与 ^，
+                // 统一强制补全为标准的 ||domain^ 锚定格式，避免因上游源书写不规范
+                // 而产生退化为子串匹配的“裸域名”规则，造成误匹配风险。
+                rule.getControls().add(Rule.Control.OVERLAY);
+                rule.getControls().add(Rule.Control.QUALIFIER);
             } else if (rule.getType() == null) {
                 rule.setType(Rule.Type.UNKNOWN);
             }
