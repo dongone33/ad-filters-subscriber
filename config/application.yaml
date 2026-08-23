@@ -67,6 +67,11 @@ application:
     - name: 'hyper_adrules_malware_adguard'
       path: 'https://github.com/Lynricsy/HyperADRules/releases/latest/download/hyper_adrules_malware_adguard.txt'
       type: dns
+
+    #本地添加
+    - name: 'mylist'
+      path: 'https://raw.githubusercontent.com/dongone33/ad-filters-subscriber/refs/heads/main/src/main/mylist.txt'
+      type: dns
       
     #以下是白名单
     - name: '茯苓允许列表'
