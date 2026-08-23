@@ -33,6 +33,10 @@ public class HttpFetcher extends Fetcher {
         final HttpClient httpClient = HttpClient.create()
                 .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, (int) property.connectTimeout().toMillis())
                 .responseTimeout(property.responseTimeout())
+                // 部分源（如 GitHub Releases 下载直链）需要经过多次 302 跳转才能拿到真实内容，
+                // Reactor Netty 默认不跟随重定向，需要显式开启，否则会拿到空的重定向响应体，
+                // 表现为 parsing 阶段 total/effective 均为 0
+                .followRedirect(true)
                 .doOnConnected(conn -> conn
                         .addHandlerLast(new ReadTimeoutHandler(property.readTimeout().toMillis(), TimeUnit.MILLISECONDS))
                         .addHandlerLast(new WriteTimeoutHandler(property.writeTimeout().toMillis(), TimeUnit.MILLISECONDS))
