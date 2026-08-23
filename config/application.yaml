@@ -70,7 +70,7 @@ application:
 
     #本地添加
     - name: 'mylist'
-      path: 'https://raw.githubusercontent.com/dongone33/ad-filters-subscriber/refs/heads/main/src/main/mylist.txt'
+      path: 'https://raw.githubusercontent.com/dongone33/ad-filters-subscriber/refs/heads/main/mylist/mylist.txt'
       type: dns
       
     #以下是白名单
