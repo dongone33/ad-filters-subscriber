@@ -18,7 +18,7 @@ application:
 
     - name: 'DD-AD'
       path: 'https://raw.githubusercontent.com/afwfv/DD-AD/refs/heads/release/dns.txt'
-      type: easylist
+      type: dns
 
     - name: 'qy-Ads-Rule'
       path: 'https://raw.githubusercontent.com/790953214/qy-Ads-Rule/refs/heads/main/black.txt'
