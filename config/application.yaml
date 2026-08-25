@@ -30,11 +30,11 @@ application:
       
     - name: '那个谁520规则'
       path: 'https://raw.githubusercontent.com/qq5460168/666/master/dns.txt'
-      type: easylist
+      type: dns
 
     - name: 'TTDNS'
       path: 'https://raw.githubusercontent.com/TTDNS/Cat/refs/heads/main/DNS.TXT'
-      type: easylist
+      type: dns
       
     - name: '茯苓广告规则'
       path: 'https://raw.githubusercontent.com/Kuroba-Sayuki/FuLing-AdRules/Master/FuLingRules/FuLingBlockList.txt'
@@ -80,7 +80,7 @@ application:
       
     - name: '那个谁520广告白名单'
       path: 'https://raw.githubusercontent.com/qq5460168/666/master/allow.txt'
-      type: easylist   
+      type: dns   
       
     - name: 'anti-AD-plus_allowlist'
       path: 'https://raw.githubusercontent.com/mphin/adguardhome_rules/main/Allowlist.txt'
@@ -88,7 +88,7 @@ application:
       
     - name: 'DNS-Kuner_allowlist'
       path: 'https://raw.githubusercontent.com/Kuner-mw/DNS-Kuner/main/FilterRules/allowlist.txt'
-      type: easylist 
+      type: dns 
     
     - name: '喵二白名单'
       path: 'https://raw.githubusercontent.com/miaoermua/AdguardFilter/main/whitelist.txt'
