@@ -21,7 +21,7 @@ application:
       type: dns
 
     - name: 'qy-Ads-Rule'
-      path: 'https://raw.githubusercontent.com/790953214/qy-Ads-Rule/refs/heads/main/black.txt'
+      path: 'https://raw.githubusercontent.com/rssvcn/qy-Ads-Rule/main/black.txt'
       type: easylist
       
     - name: 'SMAdHosts'
